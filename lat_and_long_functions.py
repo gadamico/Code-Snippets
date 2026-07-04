@@ -56,3 +56,24 @@ def c1Cc2(c1, c2, north_or_east='north', mainland=True):
             pt2 = points[c2]['e']
         
     return pt1 > pt2
+
+
+def mainland_overlappers(country, long=True):
+
+    cty = x_lats2[country]
+    
+    out = []
+
+    if long:
+        for k in x_lats2.keys():
+            if (x_lats2[k]['me'] < cty['me'] and x_lats2[k]['me'] > cty['mw']) \
+            or (x_lats2[k]['mw'] > cty['mw'] and x_lats2[k]['mw'] < cty['me']):
+                out.append(k)
+    
+    else:
+        for k in x_lats2.keys():
+            if (x_lats2[k]['mn'] < cty['mn'] and x_lats2[k]['mn'] > cty['ms']) \
+            or (x_lats2[k]['ms'] > cty['ms'] and x_lats[k]['ms'] < cty['mn']):
+                out.append(k)
+    
+    return out
